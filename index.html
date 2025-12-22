@@ -42,7 +42,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm md:text-base leading-tight tracking-tight">KOPKAR AKM</h1>
-                    <p class="text-[9px] text-emerald-400 uppercase font-medium tracking-widest">Survey Anggota 2025</p>
+                    <p class="text-[9px] text-emerald-400 uppercase font-medium tracking-widest text-center">Digital Survey 2025</p>
                 </div>
             </div>
             <div id="loc-badge" class="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-full text-[10px] text-white font-semibold border border-slate-700">
@@ -57,9 +57,8 @@
             
             <div class="lg:col-span-8 space-y-4">
                 
-                <!-- Navigasi Langkah (Profil + 4 Unit + Saran = 6 Langkah) -->
                 <nav class="bg-white p-1.5 rounded-2xl flex overflow-x-auto gap-1 shadow-sm border border-slate-100 no-scrollbar sticky top-20 z-40">
-                    <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-50 text-white shadow-sm">1. PROFIL</button>
+                    <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-500 text-white shadow-sm">1. PROFIL</button>
                     <button onclick="showStep(2)" id="btn-2" class="step-btn text-slate-400 hover:bg-slate-50">2. GCG</button>
                     <button onclick="showStep(3)" id="btn-3" class="step-btn text-slate-400 hover:bg-slate-50">3. USP</button>
                     <button onclick="showStep(4)" id="btn-4" class="step-btn text-slate-400 hover:bg-slate-50">4. TRAVEL</button>
@@ -67,7 +66,6 @@
                     <button onclick="showStep(6)" id="btn-6" class="step-btn text-slate-400 hover:bg-slate-50">6. SARAN</button>
                 </nav>
 
-                <!-- LANGKAH 1: PROFIL -->
                 <div id="step-1" class="survey-card p-6 md:p-8 animate-content">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="bg-emerald-100 p-2 rounded-xl text-emerald-600"><i data-lucide="user-check"></i></div>
@@ -105,10 +103,8 @@
                     <button onclick="validateAndGo(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg active:scale-95 transition">Mulai Penilaian &rarr;</button>
                 </div>
 
-                <!-- Bagian Unit Bisnis (Langkah 2 - 5) akan dibuat secara dinamis -->
                 <div id="dynamic-steps"></div>
 
-                <!-- LANGKAH 6: SARAN & FOTO -->
                 <div id="step-6" class="hidden survey-card p-6 animate-content">
                     <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="message-square" class="text-emerald-500"></i> Harapan & Saran</h2>
                     <div class="space-y-6">
@@ -133,7 +129,7 @@
                     </div>
                     <div class="mt-10 flex gap-3">
                         <button onclick="showStep(5)" class="flex-1 py-4 font-bold text-slate-400 bg-slate-50 rounded-2xl">Kembali</button>
-                        <button id="submit-btn" onclick="finishSurvey()" class="flex-[2] bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Kirim & Unduh Resume</button>
+                        <button id="submit-btn" onclick="finishSurvey()" class="flex-[2] bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Kirim Penilaian</button>
                     </div>
                 </div>
 
@@ -164,31 +160,25 @@
     </main>
 
     <div id="report-modal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
-        <div id="printable-area" class="bg-white rounded-[2.5rem] p-8 max-w-lg w-full text-center shadow-2xl animate-slide-up">
+        <div class="bg-white rounded-[2.5rem] p-8 max-w-lg w-full text-center shadow-2xl animate-slide-up">
             <h3 class="text-2xl font-black text-slate-900">Hasil Survei Anda</h3>
             <div class="bg-slate-50 rounded-3xl p-5 text-left my-6 border border-slate-100">
                 <p class="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-widest">Resume Perbaikan</p>
                 <div id="insight-list" class="text-xs text-slate-600 space-y-3 leading-relaxed font-medium"></div>
             </div>
-            <div class="flex flex-col gap-3">
-                <button onclick="window.print()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-2">
-                    <i data-lucide="download" class="w-4 h-4"></i> Unduh / Cetak PDF
-                </button>
-                <button onclick="location.reload()" class="w-full bg-slate-100 text-slate-600 py-4 rounded-2xl font-bold">Selesai</button>
-            </div>
+            <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-lg">Selesai</button>
         </div>
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxWIb8yIRRoqcuvgogEpqaIJr7RtW5AGp1H2-2q3XLoOlyC_f4X4Do4eBkkgatazX_3Zg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxF-SCb0j5tKN6MjW_0r9bYClbhn4cWm2uDgLcfamruBO-Oa_sTQkCKa-4-sm2-RhjX8g/exec';
         let chart;
         
-        // Data inisialisasi sesuai Blueprint
         const surveyData = { 
-            gcg: [3,3,3,3,3,3], // 6 butir
-            usp: [3,3,3,3,3,3], // 6 butir
-            trv: [3,3,3,3],     // 4 butir
-            ret: [3,3,3,3,3,3]  // 6 butir
+            gcg: [3,3,3,3,3,3],
+            usp: [3,3,3,3,3,3],
+            trv: [3,3,3,3],
+            ret: [3,3,3,3,3,3]
         };
         const skippedUnits = { trv: false, ret: false };
 
@@ -211,9 +201,9 @@
             ]},
             trv: { title: "Evaluasi Unit Kopkarindo Travel", qs: [
                 "Fasilitas: Kualitas hotel & transportasi sesuai harga paket",
-                "Pelayanan Ibadah: Pembimbing (Muthowif) kompeten membimbing Umroh",
-                "Pembiayaan: Skema talangan dana Umroh transparan & membantu",
-                "Administrasi: Pengurusan dokumen (paspor/visa) cepat & rapi"
+                "Pelayanan Pembimbing (Muthowif)/ Tour Guide kompeten membimbing ",
+                "Pembiayaan: Skema talangan dana Umroh/ Tour & Travel transparan & membantu",
+                "Administrasi: Pengurusan dokumen (paspor/visa/tiket dll) cepat & rapi"
             ], allowSkip: true},
             ret: { title: "Evaluasi Unit Ritel (Adamart & Voucher)", qs: [
                 "Ketersediaan Barang: Barang kebutuhan pokok selalu tersedia di Adamart",
@@ -315,13 +305,10 @@
                 const btn = document.getElementById(`btn-${i}`);
                 if(btn) btn.className = "step-btn text-slate-400 hover:bg-slate-50";
             }
-            
             const target = document.getElementById(`step-${s}`);
             if(target) target.classList.remove('hidden');
-            
             const activeBtn = document.getElementById(`btn-${s}`);
             if(activeBtn) activeBtn.className = "step-btn bg-emerald-500 text-white shadow-md scale-105";
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
