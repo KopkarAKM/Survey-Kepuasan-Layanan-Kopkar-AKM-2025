@@ -52,10 +52,8 @@
     <main class="max-w-6xl mx-auto px-4 mt-5">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <!-- Main Survey Area -->
             <div class="lg:col-span-8 space-y-4">
                 
-                <!-- Horizontal Step Progress -->
                 <nav class="bg-white p-1.5 rounded-2xl flex overflow-x-auto gap-1 shadow-sm border border-slate-100 no-scrollbar sticky top-20 z-40">
                     <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-500 text-white shadow-sm">1. PROFIL</button>
                     <button onclick="showStep(2)" id="btn-2" class="step-btn text-slate-400 hover:bg-slate-50">2. GCG</button>
@@ -66,7 +64,6 @@
                     <button onclick="showStep(7)" id="btn-7" class="step-btn text-slate-400 hover:bg-slate-50">7. SARAN</button>
                 </nav>
 
-                <!-- SECTION A: PROFIL -->
                 <div id="step-1" class="survey-card p-6 md:p-8 animate-content">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="bg-emerald-100 p-2 rounded-xl text-emerald-600">
@@ -97,34 +94,36 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Unit Layanan Sering Digunakan</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Unit Layanan Yang Sering Kamu Gunakan</label>
                             <select id="in-unit-fav" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
-                                <option>Simpan Pinjam</option><option>Adamart</option><option>Travel</option><option>Voucher</option>
+                                <option value="Semua">Gunakan Semua Layanan</option>
+                                <option value="Simpan Pinjam">Simpan Pinjam</option>
+                                <option value="Adamart">Adamart</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Voucher">Voucher</option>
                             </select>
                         </div>
                     </div>
-                    <button onclick="showStep(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-emerald-100 active:scale-95 transition">Mulai Isi Survei &rarr;</button>
+                    <button onclick="validateAndGo(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-emerald-100 active:scale-95 transition">Mulai Isi Survei &rarr;</button>
                 </div>
 
-                <!-- Dynamic Steps Container -->
                 <div id="dynamic-steps"></div>
 
-                <!-- SECTION G: HARAPAN -->
                 <div id="step-7" class="hidden survey-card p-6 animate-content">
                     <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                         <i data-lucide="message-circle" class="text-emerald-500"></i> Harapan Anggota
                     </h2>
                     <div class="space-y-6">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Produk baru yang Anda butuhkan tahun depan?</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Produk baru apa yang paling Kamu butuhkan tahun depan?</label>
                             <textarea id="in-harapan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2" placeholder="Contoh: KPR, Kredit Kendaraan..."></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Satu hal utama yang harus segera diperbaiki?</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Tuliskan satu hal utama yang harus segera diperbaiki pengelola.</label>
                             <textarea id="in-perbaikan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Saran meningkatkan nilai SHU tahun depan?</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Punya saran untuk meningkatkan nilai SHU tahun depan?</label>
                             <textarea id="in-saran-shu" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2"></textarea>
                         </div>
                     </div>
@@ -136,7 +135,6 @@
 
             </div>
 
-            <!-- Dashboard Analytics Panel -->
             <div class="lg:col-span-4 space-y-4">
                 <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl overflow-hidden relative">
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-10">Skor Indeks Kepuasan</p>
@@ -165,14 +163,13 @@
         </div>
     </main>
 
-    <!-- Success Insight Modal -->
     <div id="report-modal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-[2.5rem] p-8 max-w-lg w-full text-center shadow-2xl animate-slide-up">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-5">
                 <i data-lucide="check-circle-2" class="w-10 h-10"></i>
             </div>
             <h3 class="text-2xl font-black text-slate-900">Survei Berhasil!</h3>
-            <p class="text-slate-400 text-xs mt-1">Aspirasi Anda telah tercatat secara permanen.</p>
+            <p class="text-slate-400 text-xs mt-1">Aspirasi Kamu telah tercatat secara permanen.</p>
             
             <div class="bg-slate-50 rounded-3xl p-5 text-left my-6 border border-slate-100">
                 <p class="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-widest flex items-center gap-1.5">
@@ -203,12 +200,12 @@
                 "Pencairan pinjaman tepat waktu sesuai janji",
                 "Suku bunga pinjaman masih kompetitif",
                 "Penjelasan biaya admin & premi asuransi jelas",
-                "Proses penarikan simpanan sukarela mudah",
+                "Penarikan simpanan sukarela mudah & lancar",
                 "Koperasi memberi solusi kendala potong gaji"
             ]},
             dig: { title: "Transformasi Digital (Aplikasi)", qs: [
                 "Aplikasi mobile mudah digunakan di Android",
-                "Fitur cek saldo & sisa pinjaman diperbarui tepat waktu",
+                "Cek saldo & sisa pinjaman diperbarui tepat waktu",
                 "Simulasi pinjaman aplikasi sesuai potongan gaji riil",
                 "Notifikasi transaksi membantu pantau aktivitas"
             ]},
@@ -222,7 +219,7 @@
                 "Barang kebutuhan pokok di Adamart selalu tersedia",
                 "Jam operasional toko sesuai kebutuhan kerja site",
                 "Proses redeem/penggunaan voucher belanja cepat",
-                "Menerima biaya jasa voucher karena faktor kemudahan"
+                "Biaya jasa voucher 5% sesuai dengan kemudahan"
             ]}
         };
 
@@ -233,6 +230,18 @@
             calculateScores();
             setTimeout(fetchGlobalStats, 800); 
         };
+
+        function validateAndGo(step) {
+            const nik = document.getElementById('in-nik').value.trim();
+            const nama = document.getElementById('in-nama').value.trim();
+            const lokasi = document.getElementById('in-lokasi').value;
+            
+            if (!nik || !nama || !lokasi) {
+                alert("Harap isi NIK, Nama, dan Lokasi Kamu.");
+                return;
+            }
+            showStep(step);
+        }
 
         function renderSteps() {
             let html = "";
@@ -258,8 +267,8 @@
                                 <div class="px-1">
                                     <input type="range" min="1" max="5" value="3" data-cat="${key}" data-idx="${i}" class="q-slider">
                                     <div class="flex justify-between mt-2">
-                                        <span class="text-[8px] text-slate-300 font-bold uppercase tracking-widest">Sangat Tidak Setuju</span>
-                                        <span class="text-[8px] text-emerald-400 font-bold uppercase tracking-widest">Sangat Setuju</span>
+                                        <span class="text-[8px] text-slate-300 font-bold uppercase tracking-widest">Buruk</span>
+                                        <span class="text-[8px] text-emerald-400 font-bold uppercase tracking-widest">Sangat Baik</span>
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +301,7 @@
                 document.getElementById('global-score').innerText = stats.average || "0";
                 document.getElementById('global-count').innerText = `Berdasarkan ${stats.count || 0} Responden`;
             } catch (e) {
-                document.getElementById('global-count').innerText = "Mode Sinkronisasi Aktif";
+                document.getElementById('global-count').innerText = "Data sedang disinkronisasi";
             }
         }
 
@@ -346,21 +355,13 @@
 
         async function finishSurvey() {
             const btn = document.getElementById('submit-btn');
-            const nik = document.getElementById('in-nik').value;
-            const nama = document.getElementById('in-nama').value;
-            const lokasi = document.getElementById('in-lokasi').value;
-            
-            if (!nik || !nama || !lokasi) { 
-                alert("Harap lengkapi Profil Anda di Bagian 1."); 
-                showStep(1); 
-                return; 
-            }
-            
-            btn.innerHTML = "Sabar, sedang mengirim...";
+            btn.innerHTML = "Sedang mengirim data...";
             btn.disabled = true;
             
             const payload = {
-                nik, nama, lokasi,
+                nik: document.getElementById('in-nik').value,
+                nama: document.getElementById('in-nama').value,
+                lokasi: document.getElementById('in-lokasi').value,
                 masa_anggota: document.getElementById('in-masa').value,
                 unit_layanan: document.getElementById('in-unit-fav').value,
                 gcg: surveyData.gcg, usp: surveyData.usp, dig: surveyData.dig, trv: surveyData.trv, ret: surveyData.ret,
@@ -375,18 +376,18 @@
                 
                 const avgVal = (arr) => arr.reduce((a,b)=>a+b,0)/arr.length;
                 const insights = [];
-                if (avgVal(surveyData.gcg) < 3.5) insights.push("Tingkatkan frekuensi laporan real-time melalui kanal digital.");
-                if (avgVal(surveyData.usp) < 3.5) insights.push("Tinjau kembali kebijakan administrasi agar pencairan pinjaman lebih instan.");
-                if (avgVal(surveyData.dig) < 3.5) insights.push("Lakukan pembaruan rutin pada fitur notifikasi dan simulasi aplikasi.");
-                if (payload.perbaikan_utama.length > 5) insights.push("Keluhan utama Anda telah diprioritaskan untuk rapat evaluasi.");
-                if (insights.length === 0) insights.push("Standar layanan Anda sangat memuaskan, pertahankan integritas pengurus.");
+                if (avgVal(surveyData.gcg) < 3.8) insights.push("Tingkatkan transparansi pengelolaan dana kepada anggota.");
+                if (avgVal(surveyData.usp) < 3.8) insights.push("Perlu penyederhanaan birokrasi pencairan pinjaman.");
+                if (avgVal(surveyData.dig) < 3.8) insights.push("Optimalkan fitur simulasi pinjaman agar lebih akurat.");
+                if (payload.perbaikan_utama.length > 5) insights.push("Satu perbaikan utama Kamu telah masuk daftar evaluasi.");
+                if (insights.length === 0) insights.push("Kinerja sangat memuaskan, pertahankan integritas Kamu.");
 
                 document.getElementById('insight-list').innerHTML = insights.map(i => `<p class="flex gap-2"><span>•</span> <span>${i}</span></p>`).join('');
                 document.getElementById('report-modal').style.display = 'flex';
                 lucide.createIcons();
             } catch (e) { 
-                alert("Koneksi terputus. Silakan coba lagi."); 
-                btn.innerHTML = "Coba Kirim Lagi"; 
+                alert("Gagal mengirim. Coba lagi."); 
+                btn.innerHTML = "Kirim Ulang"; 
                 btn.disabled = false; 
             }
         }
