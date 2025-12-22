@@ -14,8 +14,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 12px; outline: none; transition: opacity 0.2s; }
-        input[type=range]:disabled { opacity: 0.3; cursor: not-allowed; }
+        input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 12px; outline: none; }
         input[type=range]::-webkit-slider-thumb { 
             -webkit-appearance: none; 
             width: 28px; height: 28px; border-radius: 50%; 
@@ -42,7 +41,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm md:text-base leading-tight tracking-tight">KOPKAR AKM</h1>
-                    <p class="text-[9px] text-emerald-400 uppercase font-medium tracking-widest text-center"> Survey Pelayanan 2025</p>
+                    <p class="text-[9px] text-emerald-400 uppercase font-medium tracking-widest text-center">Survei Layanan 2025</p>
                 </div>
             </div>
             <div id="loc-badge" class="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-full text-[10px] text-white font-semibold border border-slate-700">
@@ -58,7 +57,7 @@
             <div class="lg:col-span-8 space-y-4">
                 
                 <nav class="bg-white p-1.5 rounded-2xl flex overflow-x-auto gap-1 shadow-sm border border-slate-100 no-scrollbar sticky top-20 z-40">
-                    <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-500 text-white shadow-sm">1. PROFIL</button>
+                    <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-50 text-white shadow-sm">1. PROFIL</button>
                     <button onclick="showStep(2)" id="btn-2" class="step-btn text-slate-400 hover:bg-slate-50">2. GCG</button>
                     <button onclick="showStep(3)" id="btn-3" class="step-btn text-slate-400 hover:bg-slate-50">3. USP</button>
                     <button onclick="showStep(4)" id="btn-4" class="step-btn text-slate-400 hover:bg-slate-50">4. TRAVEL</button>
@@ -66,10 +65,11 @@
                     <button onclick="showStep(6)" id="btn-6" class="step-btn text-slate-400 hover:bg-slate-50">6. SARAN</button>
                 </nav>
 
+                <!-- LANGKAH 1: PROFIL -->
                 <div id="step-1" class="survey-card p-6 md:p-8 animate-content">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="bg-emerald-100 p-2 rounded-xl text-emerald-600"><i data-lucide="user-check"></i></div>
-                        <h2 class="text-xl font-bold text-slate-800">Profil Responden</h2>
+                        <h2 class="text-xl font-bold text-slate-800">Profil Anggota</h2>
                     </div>
                     <div class="space-y-5">
                         <div>
@@ -84,41 +84,40 @@
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Unit Kerja / Lokasi Site</label>
                             <select onchange="updateProfile()" id="in-lokasi" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
                                 <option value="">Pilih Lokasi</option>
-                                <option>Kelanis</option><option>Dahai</option><option>Wara KM 73</option><option> Field Office</option>
+                                <option>Kelanis</option><option>Dahai</option><option>Wara KM 73</option><option>Field Office</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Lama Menjadi Anggota</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Masa Keanggotaan</label>
                             <select id="in-masa" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
-                                <option><1 th</option><option>1-5 th</option><option>>5 th</option>
+                                <option value="<1 th">&lt; 1 th</option>
+                                <option value="1-5 th">1-5 th</option>
+                                <option value=">5 th">&gt; 5 th</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Layanan Yang Pernah Digunakan</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Layanan Yang Pernah Digunakan (2024-2025)</label>
                             <select id="in-unit-fav" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
                                 <option>Simpan Pinjam</option><option>Adamart</option><option>Travel</option><option>Voucher</option><option>Semua Layanan</option>
                             </select>
                         </div>
                     </div>
-                    <button onclick="validateAndGo(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg active:scale-95 transition">Mulai Penilaian &rarr;</button>
+                    <button onclick="validateAndGo(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg active:scale-95 transition">Mulai Survei &rarr;</button>
                 </div>
 
                 <div id="dynamic-steps"></div>
 
+                <!-- LANGKAH 6: SARAN -->
                 <div id="step-6" class="hidden survey-card p-6 animate-content">
-                    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="message-square" class="text-emerald-500"></i> Harapan & Saran</h2>
+                    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="message-square" class="text-emerald-500"></i> Saran & Masukan</h2>
                     <div class="space-y-6">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Produk baru apa yang Anda butuhkan tahun depan?</label>
-                            <textarea id="in-harapan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3"></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Apa saran konkret Anda untuk Pengurus Kopkar AKM periode mendatang?</label>
+                            <textarea id="in-saran" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3" placeholder="Tuliskan saran Anda..."></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Hal utama yang harus segera diperbaiki?</label>
-                            <textarea id="in-perbaikan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Saran meningkatkan nilai SHU?</label>
-                            <textarea id="in-saran-shu" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3"></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Kendala apa yang paling sering Anda alami saat berurusan dengan layanan koperasi?</label>
+                            <textarea id="in-kendala" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3" placeholder="Tuliskan kendala Anda..."></textarea>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200">
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-2 flex items-center gap-2">
@@ -128,8 +127,8 @@
                         </div>
                     </div>
                     <div class="mt-10 flex gap-3">
-                        <button onclick="showStep(5)" class="flex-1 py-4 font-bold text-slate-400 bg-slate-50 rounded-2xl">Kembali</button>
-                        <button id="submit-btn" onclick="finishSurvey()" class="flex-[2] bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Kirim Penilaian</button>
+                        <button onclick="showStep(5)" class="flex-1 py-4 font-bold text-slate-400 bg-slate-50 rounded-2xl transition">Kembali</button>
+                        <button id="submit-btn" onclick="finishSurvey()" class="flex-[2] bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Kirim Hasil</button>
                     </div>
                 </div>
 
@@ -137,7 +136,7 @@
 
             <div class="lg:col-span-4 space-y-4">
                 <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl overflow-hidden relative">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-10">Skor Indeks Anda</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-10">Skor Anda</p>
                     <div class="flex items-baseline gap-1 relative z-10">
                         <span class="text-6xl font-black text-emerald-400" id="total-score">0</span>
                         <span class="text-xl font-bold text-slate-500">%</span>
@@ -147,7 +146,7 @@
                 <div class="bg-emerald-600 text-white p-5 rounded-3xl shadow-lg relative overflow-hidden">
                     <p class="text-[10px] font-bold text-emerald-100 uppercase tracking-widest mb-1">Rata-rata Komunitas</p>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-black text-white" id="global-score">--</span>
+                        <span class="text-4xl font-black" id="global-score">--</span>
                         <span class="text-base font-bold text-emerald-200">%</span>
                     </div>
                     <p class="text-[8px] mt-2 text-emerald-100 font-medium" id="global-count">Memuat data...</p>
@@ -159,11 +158,15 @@
         </div>
     </main>
 
+    <!-- Modal Berhasil -->
     <div id="report-modal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-[2.5rem] p-8 max-w-lg w-full text-center shadow-2xl animate-slide-up">
-            <h3 class="text-2xl font-black text-slate-900">Hasil Survei Anda</h3>
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900">Berhasil Terkirim!</h3>
             <div class="bg-slate-50 rounded-3xl p-5 text-left my-6 border border-slate-100">
-                <p class="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-widest">Resume Perbaikan</p>
+                <p class="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-widest">Saran Perbaikan Strategis</p>
                 <div id="insight-list" class="text-xs text-slate-600 space-y-3 leading-relaxed font-medium"></div>
             </div>
             <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-lg">Selesai</button>
@@ -171,7 +174,7 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxF-SCb0j5tKN6MjW_0r9bYClbhn4cWm2uDgLcfamruBO-Oa_sTQkCKa-4-sm2-RhjX8g/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbymG6R-RW5C9oDkCFPyrSbYLL1oHlp7GlgSjQxW6kQDs22XEPLCQPpV_PBk8uNo43iU6Q/exec';
         let chart;
         
         const surveyData = { 
@@ -184,7 +187,7 @@
 
         const blueprint = {
             gcg: { title: "Evaluasi Pengurus & GCG", qs: [
-                "Visi & Strategi: Program kerja jelas untuk kesejahteraan anggota",
+                "Visi & Strategi: Pengurus memiliki program kerja yang jelas",
                 "Transparansi Keuangan: Laporan perkembangan aset terbuka & mudah dipahami",
                 "Responsivitas Pengurus: Cepat tanggap merespon aspirasi/keluhan",
                 "Keadilan (Fairness): Tidak ada diskriminasi dalam layanan pinjaman",
@@ -201,17 +204,17 @@
             ]},
             trv: { title: "Evaluasi Unit Kopkarindo Travel", qs: [
                 "Fasilitas: Kualitas hotel & transportasi sesuai harga paket",
-                "Pelayanan Pembimbing (Muthowif)/ Tour Guide kompeten membimbing ",
-                "Pembiayaan: Skema talangan dana Umroh/ Tour & Travel transparan & membantu",
-                "Administrasi: Pengurusan dokumen (paspor/visa/tiket dll) cepat & rapi"
+                "Pelayanan Pembimbing (Muthowif)/ Tour Guide: Kompeten membimbing dan melayani",
+                "Pembiayaan: Skema talangan dana transparan & sangat membantu",
+                "Administrasi: Pengurusan dokumen (paspor/visa/tiket) cepat & rapi"
             ], allowSkip: true},
             ret: { title: "Evaluasi Unit Ritel (Adamart & Voucher)", qs: [
                 "Ketersediaan Barang: Barang kebutuhan pokok selalu tersedia di Adamart",
                 "Harga Barang: Harga produk di Adamart bersaing & wajar",
-                "Kenyamanan Toko: Toko Adamart bersih, rapi, dan nyaman untuk berbelanja",
+                "Kenyamanan Toko: Toko Adamart bersih, rapi, dan nyaman berbelanja",
                 "Lokasi: Lokasi Adamart mudah dijangkau dari tempat kerja/mess",
                 "Layanan Voucher: Proses penerbitan voucher belanja cepat & mudah",
-                "Biaya Voucher: Memahami & menerima biaya jasa 5% sebagai biaya kenyamanan"
+                "Biaya Voucher: Memahami & menerima biaya jasa 5% sebagai kenyamanan"
             ], allowSkip: true}
         };
 
@@ -227,7 +230,7 @@
             const nik = document.getElementById('in-nik').value.trim();
             const nama = document.getElementById('in-nama').value.trim();
             const lokasi = document.getElementById('in-lokasi').value;
-            if (!nik || !nama || !lokasi) { alert("Harap lengkapi Profil NIK, Nama, dan Lokasi."); return; }
+            if (!nik || !nama || !lokasi) { alert("Harap lengkapi Profil NIK, Nama, dan Lokasi Anda."); return; }
             showStep(step);
         }
 
@@ -246,8 +249,7 @@
 
         function renderSteps() {
             let html = "";
-            const keys = Object.keys(blueprint);
-            keys.forEach((key, idx) => {
+            Object.keys(blueprint).forEach((key, idx) => {
                 const stepIdx = idx + 2;
                 const nextStep = (stepIdx === 5) ? 6 : stepIdx + 1;
                 const prevStep = stepIdx - 1;
@@ -257,7 +259,7 @@
                         <h2 class="text-lg font-bold text-slate-800">${blueprint[key].title}</h2>
                         ${blueprint[key].allowSkip ? `
                         <label class="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase">
-                            <input type="checkbox" class="na-check" onchange="toggleSkip('${key}')"> Belum Pernah Pakai
+                            <input type="checkbox" class="na-check" onchange="toggleSkip('${key}')"> Belum Pernah Menggunakan
                         </label>` : ''}
                     </div>
                     <div class="space-y-10" id="unit-qs-${key}">
@@ -266,7 +268,7 @@
                                 <label class="text-sm font-semibold text-slate-700 leading-snug">${q}</label>
                                 <input type="range" min="1" max="5" value="3" data-cat="${key}" data-idx="${i}" class="q-slider">
                                 <div class="flex justify-between text-[8px] font-bold text-slate-300 uppercase">
-                                    <span>Buruk</span><span>Sangat Baik</span>
+                                    <span>Buruk</span><span>Bagus</span>
                                 </div>
                             </div>
                         `).join('')}
@@ -293,8 +295,8 @@
                 const response = await fetch(`${scriptURL}?t=${Date.now()}`);
                 const stats = await response.json();
                 document.getElementById('global-score').innerText = stats.average || "0";
-                document.getElementById('global-count').innerText = `Berdasarkan ${stats.count || 0} Responden`;
-            } catch (e) { document.getElementById('global-count').innerText = "Mode Sinkronisasi"; }
+                document.getElementById('global-count').innerText = `${stats.count || 0} Anggota`;
+            } catch (e) { document.getElementById('global-count').innerText = "Mode Offline"; }
         }
 
         function showStep(s) {
@@ -336,7 +338,8 @@
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
                         borderColor: '#10b981',
                         borderWidth: 3,
-                        pointBackgroundColor: '#10b981'
+                        pointBackgroundColor: '#10b981',
+                        pointRadius: 4
                     }]
                 },
                 options: {
@@ -350,10 +353,23 @@
 
         async function finishSurvey() {
             const btn = document.getElementById('submit-btn');
-            btn.innerHTML = "Mengirim...";
+            btn.innerHTML = "Sedang Mengirim...";
             btn.disabled = true;
             
             const fileInput = document.getElementById('in-foto');
+            let photoData = "Tidak ada foto";
+
+            const toBase64 = file => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+
+            if (fileInput.files.length > 0) {
+                try { photoData = await toBase64(fileInput.files[0]); } catch (e) {}
+            }
+            
             const payload = {
                 nik: document.getElementById('in-nik').value,
                 nama: document.getElementById('in-nama').value,
@@ -365,21 +381,21 @@
                 harapan_produk: document.getElementById('in-harapan').value,
                 perbaikan_utama: document.getElementById('in-perbaikan').value,
                 saran_shu: document.getElementById('in-saran-shu').value,
-                foto_nama: fileInput.files.length > 0 ? fileInput.files[0].name : "Tidak ada foto"
+                foto_nama: photoData
             };
 
             try {
                 await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
                 const insights = [];
                 const totalSkor = parseInt(payload.total_skor);
-                if (totalSkor < 70) insights.push("Tingkatkan transparansi dan kecepatan layanan di seluruh unit.");
-                if (skippedUnits.trv) insights.push("Coba gunakan unit Travel untuk kebutuhan ibadah Anda.");
-                if (insights.length === 0) insights.push("Kinerja sangat memuaskan, pertahankan standar layanan.");
+                if (totalSkor < 70) insights.push("Tingkatkan transparansi dan kecepatan layanan di unit kerja terkait.");
+                if (skippedUnits.trv) insights.push("Gunakan unit Travel untuk kebutuhan perjalanan ibadah Anda.");
+                if (insights.length === 0) insights.push("Kinerja sangat memuaskan, pertahankan standar layanan tinggi.");
 
                 document.getElementById('insight-list').innerHTML = insights.map(i => `<p>• ${i}</p>`).join('');
                 document.getElementById('report-modal').style.display = 'flex';
                 lucide.createIcons();
-            } catch (e) { alert("Gagal mengirim."); btn.innerHTML = "Kirim Ulang"; btn.disabled = false; }
+            } catch (e) { alert("Gagal mengirim."); btn.innerHTML = "Coba Lagi"; btn.disabled = false; }
         }
     </script>
 </body>
