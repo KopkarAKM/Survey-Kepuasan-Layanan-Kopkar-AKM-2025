@@ -14,7 +14,8 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 12px; outline: none; }
+        input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 12px; outline: none; transition: opacity 0.2s; }
+        input[type=range]:disabled { opacity: 0.3; cursor: not-allowed; }
         input[type=range]::-webkit-slider-thumb { 
             -webkit-appearance: none; 
             width: 28px; height: 28px; border-radius: 50%; 
@@ -27,6 +28,8 @@
         
         @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .animate-content { animation: slideIn 0.3s ease-out forwards; }
+
+        .na-check { transform: scale(1.2); accent-color: #10b981; }
     </style>
 </head>
 <body class="text-slate-800 pb-10">
@@ -54,82 +57,83 @@
             
             <div class="lg:col-span-8 space-y-4">
                 
+                <!-- Navigasi Langkah (Profil + 4 Unit + Saran = 6 Langkah) -->
                 <nav class="bg-white p-1.5 rounded-2xl flex overflow-x-auto gap-1 shadow-sm border border-slate-100 no-scrollbar sticky top-20 z-40">
-                    <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-500 text-white shadow-sm">1. PROFIL</button>
+                    <button onclick="showStep(1)" id="btn-1" class="step-btn bg-emerald-50 text-white shadow-sm">1. PROFIL</button>
                     <button onclick="showStep(2)" id="btn-2" class="step-btn text-slate-400 hover:bg-slate-50">2. GCG</button>
                     <button onclick="showStep(3)" id="btn-3" class="step-btn text-slate-400 hover:bg-slate-50">3. USP</button>
-                    <button onclick="showStep(4)" id="btn-4" class="step-btn text-slate-400 hover:bg-slate-50">4. DIGITAL</button>
-                    <button onclick="showStep(5)" id="btn-5" class="step-btn text-slate-400 hover:bg-slate-50">5. TRAVEL</button>
-                    <button onclick="showStep(6)" id="btn-6" class="step-btn text-slate-400 hover:bg-slate-50">6. RITEL</button>
-                    <button onclick="showStep(7)" id="btn-7" class="step-btn text-slate-400 hover:bg-slate-50">7. SARAN</button>
+                    <button onclick="showStep(4)" id="btn-4" class="step-btn text-slate-400 hover:bg-slate-50">4. TRAVEL</button>
+                    <button onclick="showStep(5)" id="btn-5" class="step-btn text-slate-400 hover:bg-slate-50">5. RITEL</button>
+                    <button onclick="showStep(6)" id="btn-6" class="step-btn text-slate-400 hover:bg-slate-50">6. SARAN</button>
                 </nav>
 
+                <!-- LANGKAH 1: PROFIL -->
                 <div id="step-1" class="survey-card p-6 md:p-8 animate-content">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="bg-emerald-100 p-2 rounded-xl text-emerald-600">
-                            <i data-lucide="user-check"></i>
-                        </div>
+                        <div class="bg-emerald-100 p-2 rounded-xl text-emerald-600"><i data-lucide="user-check"></i></div>
                         <h2 class="text-xl font-bold text-slate-800">Profil Responden</h2>
                     </div>
                     <div class="space-y-5">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Nomor Anggota / NIK</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Nomor Anggota / NIK</label>
                             <input type="text" id="in-nik" inputmode="numeric" placeholder="Masukkan Nomor Anggota" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Nama Lengkap</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Nama Lengkap</label>
                             <input type="text" id="in-nama" placeholder="Masukkan Nama Lengkap" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Lokasi Kerja Utama</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Unit Kerja / Lokasi Site</label>
                             <select onchange="updateProfile()" id="in-lokasi" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
                                 <option value="">Pilih Lokasi</option>
                                 <option>Kelanis</option><option>Dahai</option><option>KM 82</option><option>Kantor Tanjung</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Masa Keanggotaan</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Lama Menjadi Anggota</label>
                             <select id="in-masa" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
-                                <option>Kurang dari 2 tahun</option><option>2 sampai 5 tahun</option><option>Lebih dari 5 tahun</option>
+                                <option><1 th</option><option>1-5 th</option><option>>5 th</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Unit Layanan Yang Sering Kamu Gunakan</label>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Layanan Yang Pernah Digunakan</label>
                             <select id="in-unit-fav" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
-                                <option value="Semua">Gunakan Semua Layanan</option>
-                                <option value="Simpan Pinjam">Simpan Pinjam</option>
-                                <option value="Adamart">Adamart</option>
-                                <option value="Travel">Travel</option>
-                                <option value="Voucher">Voucher</option>
+                                <option>Simpan Pinjam</option><option>Adamart</option><option>Travel</option><option>Voucher</option><option>Semua Layanan</option>
                             </select>
                         </div>
                     </div>
-                    <button onclick="validateAndGo(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-emerald-100 active:scale-95 transition">Mulai Isi Survei &rarr;</button>
+                    <button onclick="validateAndGo(2)" class="w-full mt-8 bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg active:scale-95 transition">Mulai Penilaian &rarr;</button>
                 </div>
 
+                <!-- Bagian Unit Bisnis (Langkah 2 - 5) akan dibuat secara dinamis -->
                 <div id="dynamic-steps"></div>
 
-                <div id="step-7" class="hidden survey-card p-6 animate-content">
-                    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                        <i data-lucide="message-circle" class="text-emerald-500"></i> Harapan Anggota
-                    </h2>
+                <!-- LANGKAH 6: SARAN & FOTO -->
+                <div id="step-6" class="hidden survey-card p-6 animate-content">
+                    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="message-square" class="text-emerald-500"></i> Harapan & Saran</h2>
                     <div class="space-y-6">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Produk baru apa yang paling Kamu butuhkan tahun depan?</label>
-                            <textarea id="in-harapan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2" placeholder="Contoh: KPR, Kredit Kendaraan..."></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Produk baru apa yang Anda butuhkan tahun depan?</label>
+                            <textarea id="in-harapan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Tuliskan satu hal utama yang harus segera diperbaiki pengelola.</label>
-                            <textarea id="in-perbaikan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2"></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Hal utama yang harus segera diperbaiki?</label>
+                            <textarea id="in-perbaikan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Punya saran untuk meningkatkan nilai SHU tahun depan?</label>
-                            <textarea id="in-saran-shu" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2"></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Saran meningkatkan nilai SHU?</label>
+                            <textarea id="in-saran-shu" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3"></textarea>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 flex items-center gap-2">
+                                <i data-lucide="camera" class="w-4 h-4"></i> Unggah Bukti Foto (Opsional)
+                            </label>
+                            <input type="file" id="in-foto" accept="image/*" class="text-xs text-slate-500 block w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
                         </div>
                     </div>
                     <div class="mt-10 flex gap-3">
-                        <button onclick="showStep(6)" class="flex-1 py-4 font-bold text-slate-400">Kembali</button>
-                        <button id="submit-btn" onclick="finishSurvey()" class="flex-[2] bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Kirim Penilaian</button>
+                        <button onclick="showStep(5)" class="flex-1 py-4 font-bold text-slate-400 bg-slate-50 rounded-2xl">Kembali</button>
+                        <button id="submit-btn" onclick="finishSurvey()" class="flex-[2] bg-slate-900 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Kirim & Unduh Resume</button>
                     </div>
                 </div>
 
@@ -137,90 +141,88 @@
 
             <div class="lg:col-span-4 space-y-4">
                 <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl overflow-hidden relative">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-10">Skor Indeks Kepuasan</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-10">Skor Indeks Anda</p>
                     <div class="flex items-baseline gap-1 relative z-10">
                         <span class="text-6xl font-black text-emerald-400" id="total-score">0</span>
                         <span class="text-xl font-bold text-slate-500">%</span>
                     </div>
-                    <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-emerald-500 opacity-10 rounded-full"></div>
                 </div>
 
                 <div class="bg-emerald-600 text-white p-5 rounded-3xl shadow-lg relative overflow-hidden">
                     <p class="text-[10px] font-bold text-emerald-100 uppercase tracking-widest mb-1">Rata-rata Komunitas</p>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-black" id="global-score">--</span>
+                        <span class="text-4xl font-black text-white" id="global-score">--</span>
                         <span class="text-base font-bold text-emerald-200">%</span>
                     </div>
                     <p class="text-[8px] mt-2 text-emerald-100 font-medium" id="global-count">Memuat data...</p>
                 </div>
 
-                <div class="survey-card p-5">
-                    <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Peta Kepuasan</h4>
-                    <div style="height: 220px;"><canvas id="radarChart"></canvas></div>
-                </div>
+                <div class="survey-card p-5 h-64"><canvas id="radarChart"></canvas></div>
             </div>
 
         </div>
     </main>
 
     <div id="report-modal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-[2.5rem] p-8 max-w-lg w-full text-center shadow-2xl animate-slide-up">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-5">
-                <i data-lucide="check-circle-2" class="w-10 h-10"></i>
-            </div>
-            <h3 class="text-2xl font-black text-slate-900">Survei Berhasil!</h3>
-            <p class="text-slate-400 text-xs mt-1">Aspirasi Kamu telah tercatat secara permanen.</p>
-            
+        <div id="printable-area" class="bg-white rounded-[2.5rem] p-8 max-w-lg w-full text-center shadow-2xl animate-slide-up">
+            <h3 class="text-2xl font-black text-slate-900">Hasil Survei Anda</h3>
             <div class="bg-slate-50 rounded-3xl p-5 text-left my-6 border border-slate-100">
-                <p class="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-widest flex items-center gap-1.5">
-                    <i data-lucide="zap" class="w-3 h-3"></i> Resume Strategis (Local Engine)
-                </p>
+                <p class="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-widest">Resume Perbaikan</p>
                 <div id="insight-list" class="text-xs text-slate-600 space-y-3 leading-relaxed font-medium"></div>
             </div>
-
-            <button onclick="location.reload()" class="w-full bg-slate-900 text-white py-4.5 rounded-2xl font-bold shadow-lg">Kembali ke Beranda</button>
+            <div class="flex flex-col gap-3">
+                <button onclick="window.print()" class="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Unduh / Cetak PDF
+                </button>
+                <button onclick="location.reload()" class="w-full bg-slate-100 text-slate-600 py-4 rounded-2xl font-bold">Selesai</button>
+            </div>
         </div>
     </div>
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxWIb8yIRRoqcuvgogEpqaIJr7RtW5AGp1H2-2q3XLoOlyC_f4X4Do4eBkkgatazX_3Zg/exec';
         let chart;
-        const surveyData = { gcg: [3,3,3,3,3], usp: [3,3,3,3,3,3], dig: [3,3,3,3], trv: [3,3,3,3], ret: [3,3,3,3] };
+        
+        // Data inisialisasi sesuai Blueprint
+        const surveyData = { 
+            gcg: [3,3,3,3,3,3], // 6 butir
+            usp: [3,3,3,3,3,3], // 6 butir
+            trv: [3,3,3,3],     // 4 butir
+            ret: [3,3,3,3,3,3]  // 6 butir
+        };
+        const skippedUnits = { trv: false, ret: false };
 
         const blueprint = {
-            gcg: { title: "Tata Kelola & Kinerja Pengurus", qs: [
-                "Pengurus mengelola aset dengan jujur & integritas",
-                "Laporan keuangan bulanan mudah diakses & dipahami",
-                "Jawaban pengurus memuaskan saat RAT/Komunikasi",
-                "Kebijakan koperasi sudah adil & tidak memihak",
-                "Aman menyimpan dana karena pengawasan ketat"
+            gcg: { title: "Evaluasi Pengurus & GCG", qs: [
+                "Visi & Strategi: Program kerja jelas untuk kesejahteraan anggota",
+                "Transparansi Keuangan: Laporan perkembangan aset terbuka & mudah dipahami",
+                "Responsivitas Pengurus: Cepat tanggap merespon aspirasi/keluhan",
+                "Keadilan (Fairness): Tidak ada diskriminasi dalam layanan pinjaman",
+                "Peran Pengawas: Aktif memeriksa & menjaga keamanan aset koperasi",
+                "Kemandirian: Keputusan bisnis dibuat mandiri tanpa intervensi luar"
             ]},
-            usp: { title: "Unit Simpan Pinjam (USP)", qs: [
-                "Proses pengajuan pinjaman tidak sulit (Dokumen)",
-                "Pencairan pinjaman tepat waktu sesuai janji",
-                "Suku bunga pinjaman masih kompetitif",
-                "Penjelasan biaya admin & premi asuransi jelas",
-                "Penarikan simpanan sukarela mudah & lancar",
-                "Koperasi memberi solusi kendala potong gaji"
+            usp: { title: "Evaluasi Unit Simpan Pinjam (USP)", qs: [
+                "Prosedur: Persyaratan administrasi mudah & tidak berbelit",
+                "Kecepatan (Speed): Dana pinjaman cair tepat waktu sesuai SLA",
+                "Suku Bunga: Jasa pinjaman (1,15%-1,5%) dirasakan wajar & bersaing",
+                "Simpanan: Kemudahan & kecepatan penarikan simpanan sukarela",
+                "Layanan Digital: Aplikasi Kopkar AKM mudah untuk cek saldo/simulasi",
+                "Kompetensi Staf: Admin mampu menjelaskan produk & potongan jelas"
             ]},
-            dig: { title: "Transformasi Digital (Aplikasi)", qs: [
-                "Aplikasi mobile mudah digunakan di Android",
-                "Cek saldo & sisa pinjaman diperbarui tepat waktu",
-                "Simulasi pinjaman aplikasi sesuai potongan gaji riil",
-                "Notifikasi transaksi membantu pantau aktivitas"
-            ]},
-            trv: { title: "Unit Kopkarindo Travel", qs: [
-                "Harga paket sebanding kualitas hotel & transportasi",
-                "Staf travel membantu pengurusan paspor & visa",
-                "Program talangan umroh membantu perencanaan ibadah",
-                "Jadwal keberangkatan & kepulangan tepat waktu"
-            ]},
-            ret: { title: "Unit Ritel (Adamart & Voucher)", qs: [
-                "Barang kebutuhan pokok di Adamart selalu tersedia",
-                "Jam operasional toko sesuai kebutuhan kerja site",
-                "Proses redeem/penggunaan voucher belanja cepat",
-                "Biaya jasa voucher 5% sesuai dengan kemudahan"
-            ]}
+            trv: { title: "Evaluasi Unit Kopkarindo Travel", qs: [
+                "Fasilitas: Kualitas hotel & transportasi sesuai harga paket",
+                "Pelayanan Ibadah: Pembimbing (Muthowif) kompeten membimbing Umroh",
+                "Pembiayaan: Skema talangan dana Umroh transparan & membantu",
+                "Administrasi: Pengurusan dokumen (paspor/visa) cepat & rapi"
+            ], allowSkip: true},
+            ret: { title: "Evaluasi Unit Ritel (Adamart & Voucher)", qs: [
+                "Ketersediaan Barang: Barang kebutuhan pokok selalu tersedia di Adamart",
+                "Harga Barang: Harga produk di Adamart bersaing & wajar",
+                "Kenyamanan Toko: Toko Adamart bersih, rapi, dan nyaman untuk berbelanja",
+                "Lokasi: Lokasi Adamart mudah dijangkau dari tempat kerja/mess",
+                "Layanan Voucher: Proses penerbitan voucher belanja cepat & mudah",
+                "Biaya Voucher: Memahami & menerima biaya jasa 5% sebagai biaya kenyamanan"
+            ], allowSkip: true}
         };
 
         window.onload = () => {
@@ -235,12 +237,21 @@
             const nik = document.getElementById('in-nik').value.trim();
             const nama = document.getElementById('in-nama').value.trim();
             const lokasi = document.getElementById('in-lokasi').value;
-            
-            if (!nik || !nama || !lokasi) {
-                alert("Harap isi NIK, Nama, dan Lokasi Kamu.");
-                return;
-            }
+            if (!nik || !nama || !lokasi) { alert("Harap lengkapi Profil NIK, Nama, dan Lokasi."); return; }
             showStep(step);
+        }
+
+        function toggleSkip(unit) {
+            skippedUnits[unit] = !skippedUnits[unit];
+            const container = document.getElementById(`unit-qs-${unit}`);
+            const sliders = container.querySelectorAll('input[type=range]');
+            sliders.forEach(s => s.disabled = skippedUnits[unit]);
+            if (skippedUnits[unit]) {
+                surveyData[unit] = surveyData[unit].map(() => 0);
+            } else {
+                surveyData[unit] = surveyData[unit].map(() => 3);
+            }
+            calculateScores();
         }
 
         function renderSteps() {
@@ -248,35 +259,31 @@
             const keys = Object.keys(blueprint);
             keys.forEach((key, idx) => {
                 const stepIdx = idx + 2;
-                const nextStep = stepIdx + 1;
+                const nextStep = (stepIdx === 5) ? 6 : stepIdx + 1;
                 const prevStep = stepIdx - 1;
                 
-                html += `
-                <div id="step-${stepIdx}" class="hidden survey-card p-6 animate-content">
-                    <div class="flex justify-between items-center mb-6">
+                html += `<div id="step-${stepIdx}" class="hidden survey-card p-6 animate-content">
+                    <div class="flex justify-between items-start mb-6">
                         <h2 class="text-lg font-bold text-slate-800">${blueprint[key].title}</h2>
-                        <span class="text-[10px] font-black bg-slate-100 text-slate-500 px-2 py-1 rounded-lg uppercase tracking-widest">${stepIdx}/7</span>
+                        ${blueprint[key].allowSkip ? `
+                        <label class="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase">
+                            <input type="checkbox" class="na-check" onchange="toggleSkip('${key}')"> Belum Pernah Pakai
+                        </label>` : ''}
                     </div>
-                    <div class="space-y-10">
+                    <div class="space-y-10" id="unit-qs-${key}">
                         ${blueprint[key].qs.map((q, i) => `
                             <div class="space-y-4">
-                                <div class="flex justify-between items-start gap-4">
-                                    <label class="text-sm font-semibold text-slate-700 leading-snug">${q}</label>
-                                    <span class="text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-xl whitespace-nowrap" id="val-${key}-${i}">3/5</span>
-                                </div>
-                                <div class="px-1">
-                                    <input type="range" min="1" max="5" value="3" data-cat="${key}" data-idx="${i}" class="q-slider">
-                                    <div class="flex justify-between mt-2">
-                                        <span class="text-[8px] text-slate-300 font-bold uppercase tracking-widest">Buruk</span>
-                                        <span class="text-[8px] text-emerald-400 font-bold uppercase tracking-widest">Sangat Baik</span>
-                                    </div>
+                                <label class="text-sm font-semibold text-slate-700 leading-snug">${q}</label>
+                                <input type="range" min="1" max="5" value="3" data-cat="${key}" data-idx="${i}" class="q-slider">
+                                <div class="flex justify-between text-[8px] font-bold text-slate-300 uppercase">
+                                    <span>Buruk</span><span>Sangat Baik</span>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
                     <div class="mt-10 flex gap-3">
-                        <button onclick="showStep(${prevStep})" class="flex-1 py-4 font-bold text-slate-400 bg-slate-50 rounded-2xl active:bg-slate-100 transition">Kembali</button>
-                        <button onclick="showStep(${nextStep})" class="flex-[2] bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-emerald-100 active:scale-95 transition">Berikutnya</button>
+                        <button onclick="showStep(${prevStep})" class="flex-1 py-4 font-bold text-slate-400 bg-slate-50 rounded-2xl transition">Kembali</button>
+                        <button onclick="showStep(${nextStep})" class="flex-[2] bg-emerald-600 text-white py-4 rounded-2xl font-bold shadow-lg transition">Berikutnya</button>
                     </div>
                 </div>`;
             });
@@ -285,9 +292,7 @@
             document.querySelectorAll('.q-slider').forEach(s => {
                 s.oninput = (e) => {
                     const { cat, idx } = e.target.dataset;
-                    const val = parseInt(e.target.value);
-                    document.getElementById(`val-${cat}-${idx}`).innerText = val + "/5";
-                    surveyData[cat][idx] = val;
+                    surveyData[cat][idx] = parseInt(e.target.value);
                     calculateScores();
                 };
             });
@@ -296,58 +301,61 @@
         async function fetchGlobalStats() {
             try {
                 const response = await fetch(`${scriptURL}?t=${Date.now()}`);
-                if (!response.ok) throw new Error();
                 const stats = await response.json();
                 document.getElementById('global-score').innerText = stats.average || "0";
                 document.getElementById('global-count').innerText = `Berdasarkan ${stats.count || 0} Responden`;
-            } catch (e) {
-                document.getElementById('global-count').innerText = "Data sedang disinkronisasi";
-            }
+            } catch (e) { document.getElementById('global-count').innerText = "Mode Sinkronisasi"; }
         }
 
         function showStep(s) {
-            for(let i=1; i<=7; i++) {
+            const totalSteps = 6;
+            for(let i=1; i<=totalSteps; i++) {
                 const el = document.getElementById(`step-${i}`);
                 if(el) el.classList.add('hidden');
                 const btn = document.getElementById(`btn-${i}`);
                 if(btn) btn.className = "step-btn text-slate-400 hover:bg-slate-50";
             }
-            document.getElementById(`step-${s}`).classList.remove('hidden');
+            
+            const target = document.getElementById(`step-${s}`);
+            if(target) target.classList.remove('hidden');
+            
             const activeBtn = document.getElementById(`btn-${s}`);
             if(activeBtn) activeBtn.className = "step-btn bg-emerald-500 text-white shadow-md scale-105";
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function updateProfile() {
-            document.getElementById('loc-text').innerText = document.getElementById('in-lokasi').value || "Lokasi?";
-        }
+        function updateProfile() { document.getElementById('loc-text').innerText = document.getElementById('in-lokasi').value || "Lokasi?"; }
 
         function calculateScores() {
-            const avg = (arr) => arr.reduce((a,b)=>a+b,0)/arr.length;
-            const res = [avg(surveyData.gcg), avg(surveyData.usp), avg(surveyData.dig), avg(surveyData.trv), avg(surveyData.ret)];
-            const total = Math.round((res.reduce((a,b)=>a+b,0)/5/5)*100);
+            const avg = (arr) => {
+                const filtered = arr.filter(v => v > 0);
+                return filtered.length > 0 ? filtered.reduce((a,b)=>a+b,0)/filtered.length : 0;
+            };
+            const scores = [avg(surveyData.gcg), avg(surveyData.usp), avg(surveyData.trv), avg(surveyData.ret)];
+            const activeScores = scores.filter(s => s > 0);
+            const total = activeScores.length > 0 ? Math.round((activeScores.reduce((a,b)=>a+b,0)/activeScores.length/5)*100) : 0;
             document.getElementById('total-score').innerText = total;
-            if (chart) { chart.data.datasets[0].data = res; chart.update(); }
+            if (chart) { chart.data.datasets[0].data = scores; chart.update(); }
         }
 
         function initChart() {
             chart = new Chart(document.getElementById('radarChart').getContext('2d'), {
                 type: 'radar',
                 data: {
-                    labels: ['GCG', 'USP', 'Digital', 'Travel', 'Ritel'],
+                    labels: ['GCG', 'USP', 'Travel', 'Ritel'],
                     datasets: [{
-                        data: [3, 3, 3, 3, 3],
+                        data: [3, 3, 3, 3],
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
                         borderColor: '#10b981',
                         borderWidth: 3,
-                        pointBackgroundColor: '#10b981',
-                        pointRadius: 4
+                        pointBackgroundColor: '#10b981'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { r: { min: 0, max: 5, ticks: { display: false }, pointLabels: { font: { size: 9, weight: '800' }, color: '#94a3b8' } } },
+                    scales: { r: { min: 0, max: 5, ticks: { display: false }, pointLabels: { font: { size: 9, weight: '800' } } } },
                     plugins: { legend: { display: false } }
                 }
             });
@@ -355,41 +363,36 @@
 
         async function finishSurvey() {
             const btn = document.getElementById('submit-btn');
-            btn.innerHTML = "Sedang mengirim data...";
+            btn.innerHTML = "Mengirim...";
             btn.disabled = true;
             
+            const fileInput = document.getElementById('in-foto');
             const payload = {
                 nik: document.getElementById('in-nik').value,
                 nama: document.getElementById('in-nama').value,
                 lokasi: document.getElementById('in-lokasi').value,
                 masa_anggota: document.getElementById('in-masa').value,
                 unit_layanan: document.getElementById('in-unit-fav').value,
-                gcg: surveyData.gcg, usp: surveyData.usp, dig: surveyData.dig, trv: surveyData.trv, ret: surveyData.ret,
+                gcg: surveyData.gcg, usp: surveyData.usp, trv: surveyData.trv, ret: surveyData.ret,
                 total_skor: document.getElementById('total-score').innerText,
                 harapan_produk: document.getElementById('in-harapan').value,
                 perbaikan_utama: document.getElementById('in-perbaikan').value,
-                saran_shu: document.getElementById('in-saran-shu').value
+                saran_shu: document.getElementById('in-saran-shu').value,
+                foto_nama: fileInput.files.length > 0 ? fileInput.files[0].name : "Tidak ada foto"
             };
 
             try {
                 await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-                
-                const avgVal = (arr) => arr.reduce((a,b)=>a+b,0)/arr.length;
                 const insights = [];
-                if (avgVal(surveyData.gcg) < 3.8) insights.push("Tingkatkan transparansi pengelolaan dana kepada anggota.");
-                if (avgVal(surveyData.usp) < 3.8) insights.push("Perlu penyederhanaan birokrasi pencairan pinjaman.");
-                if (avgVal(surveyData.dig) < 3.8) insights.push("Optimalkan fitur simulasi pinjaman agar lebih akurat.");
-                if (payload.perbaikan_utama.length > 5) insights.push("Satu perbaikan utama Kamu telah masuk daftar evaluasi.");
-                if (insights.length === 0) insights.push("Kinerja sangat memuaskan, pertahankan integritas Kamu.");
+                const totalSkor = parseInt(payload.total_skor);
+                if (totalSkor < 70) insights.push("Tingkatkan transparansi dan kecepatan layanan di seluruh unit.");
+                if (skippedUnits.trv) insights.push("Coba gunakan unit Travel untuk kebutuhan ibadah Anda.");
+                if (insights.length === 0) insights.push("Kinerja sangat memuaskan, pertahankan standar layanan.");
 
-                document.getElementById('insight-list').innerHTML = insights.map(i => `<p class="flex gap-2"><span>•</span> <span>${i}</span></p>`).join('');
+                document.getElementById('insight-list').innerHTML = insights.map(i => `<p>• ${i}</p>`).join('');
                 document.getElementById('report-modal').style.display = 'flex';
                 lucide.createIcons();
-            } catch (e) { 
-                alert("Gagal mengirim. Coba lagi."); 
-                btn.innerHTML = "Kirim Ulang"; 
-                btn.disabled = false; 
-            }
+            } catch (e) { alert("Gagal mengirim."); btn.innerHTML = "Kirim Ulang"; btn.disabled = false; }
         }
     </script>
 </body>
