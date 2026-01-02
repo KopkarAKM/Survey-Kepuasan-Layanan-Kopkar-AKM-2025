@@ -14,7 +14,8 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 12px; outline: none; }
+        input[type=range] { -webkit-appearance: none; width: 100%; height: 10px; background: #e2e8f0; border-radius: 12px; outline: none; transition: opacity 0.2s; }
+        input[type=range]:disabled { opacity: 0.3; cursor: not-allowed; }
         input[type=range]::-webkit-slider-thumb { 
             -webkit-appearance: none; 
             width: 28px; height: 28px; border-radius: 50%; 
@@ -41,7 +42,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm md:text-base leading-tight tracking-tight">KOPKAR AKM</h1>
-                    <p class="text-[9px] text-emerald-400 uppercase font-medium tracking-widest text-center">Survei Layanan 2025</p>
+                    <p class="text-[9px] text-emerald-400 uppercase font-medium tracking-widest text-center">Survei Digital 2025</p>
                 </div>
             </div>
             <div id="loc-badge" class="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-full text-[10px] text-white font-semibold border border-slate-700">
@@ -84,7 +85,7 @@
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Unit Kerja / Lokasi Site</label>
                             <select onchange="updateProfile()" id="in-lokasi" class="w-full p-4 rounded-2xl border-none bg-slate-100 focus:ring-2 focus:ring-emerald-500 text-sm font-medium appearance-none">
                                 <option value="">Pilih Lokasi</option>
-                                <option>Kelanis</option><option>Dahai</option><option>Wara KM 73</option><option>Field Office</option>
+                                <option>Kelanis</option><option>Dahai</option><option>KM 82</option><option>Kantor Tanjung</option>
                             </select>
                         </div>
                         <div>
@@ -107,17 +108,21 @@
 
                 <div id="dynamic-steps"></div>
 
-                <!-- LANGKAH 6: SARAN -->
+                <!-- LANGKAH 6: SARAN & HARAPAN (FIXED IDS) -->
                 <div id="step-6" class="hidden survey-card p-6 animate-content">
-                    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="message-square" class="text-emerald-500"></i> Saran & Masukan</h2>
+                    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="message-square" class="text-emerald-500"></i> Saran & Harapan</h2>
                     <div class="space-y-6">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Apa saran konkret Anda untuk Pengurus Kopkar AKM periode mendatang?</label>
-                            <textarea id="in-saran" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3" placeholder="Tuliskan saran Anda..."></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Produk baru apa yang paling Anda butuhkan tahun depan?</label>
+                            <textarea id="in-harapan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2" placeholder="Contoh: KPR, Kredit Kendaraan..."></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Kendala apa yang paling sering Anda alami saat berurusan dengan layanan koperasi?</label>
-                            <textarea id="in-kendala" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="3" placeholder="Tuliskan kendala Anda..."></textarea>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Satu hal utama yang harus segera diperbaiki oleh pengelola?</label>
+                            <textarea id="in-perbaikan" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2 leading-relaxed">Saran Anda untuk meningkatkan nilai SHU di tahun mendatang?</label>
+                            <textarea id="in-saran-shu" class="w-full p-4 rounded-2xl border bg-slate-50 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" rows="2"></textarea>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200">
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-2 flex items-center gap-2">
@@ -174,7 +179,7 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbymG6R-RW5C9oDkCFPyrSbYLL1oHlp7GlgSjQxW6kQDs22XEPLCQPpV_PBk8uNo43iU6Q/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxWIb8yIRRoqcuvgogEpqaIJr7RtW5AGp1H2-2q3XLoOlyC_f4X4Do4eBkkgatazX_3Zg/exec';
         let chart;
         
         const surveyData = { 
@@ -204,7 +209,7 @@
             ]},
             trv: { title: "Evaluasi Unit Kopkarindo Travel", qs: [
                 "Fasilitas: Kualitas hotel & transportasi sesuai harga paket",
-                "Pelayanan Pembimbing (Muthowif)/ Tour Guide: Kompeten membimbing dan melayani",
+                "Pelayanan Pembimbing (Muthowif): Kompeten membimbing ibadah",
                 "Pembiayaan: Skema talangan dana transparan & sangat membantu",
                 "Administrasi: Pengurusan dokumen (paspor/visa/tiket) cepat & rapi"
             ], allowSkip: true},
@@ -376,7 +381,10 @@
                 lokasi: document.getElementById('in-lokasi').value,
                 masa_anggota: document.getElementById('in-masa').value,
                 unit_layanan: document.getElementById('in-unit-fav').value,
-                gcg: surveyData.gcg, usp: surveyData.usp, trv: surveyData.trv, ret: surveyData.ret,
+                gcg: surveyData.gcg, 
+                usp: surveyData.usp, 
+                trv: surveyData.trv, 
+                ret: surveyData.ret,
                 total_skor: document.getElementById('total-score').innerText,
                 harapan_produk: document.getElementById('in-harapan').value,
                 perbaikan_utama: document.getElementById('in-perbaikan').value,
